@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
-  resources :user do
-    resources :measurement
+  resources :users, only: [:create, :update, :destroy] do
+    resources :measurements, only: [:index, :create, :update, :destroy]
   end
-  resources :unit
+  resources :units, only: [:index]
 end
