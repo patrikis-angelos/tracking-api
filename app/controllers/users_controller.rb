@@ -12,8 +12,8 @@ class UsersController < ApplicationController
   end
 
   def create
-    @user = User.create(user_params)
-    if @user.valid?
+    @user = User.new(user_params)
+    if @user.save
       token = encode_token({ user_id: @user.id })
       cookies[:user_id] = { value: @user.id, http_only: true }
       render json: { user: @user, token: token }

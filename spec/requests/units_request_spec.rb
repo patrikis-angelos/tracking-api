@@ -12,7 +12,7 @@ RSpec.describe 'Units', type: :request do
       get '/units', headers: { Authorization: "Bearer #{token}" }
       json = JSON.parse(response.body)
       expect(json).to_not be_empty
-      expect(json.size).to eql(10)
+      expect(json['units'].size).to eql(10)
     end
     it 'return an error message if the user in not logged in or anuthorized' do
       get '/units'
