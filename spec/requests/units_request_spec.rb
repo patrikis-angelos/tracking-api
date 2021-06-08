@@ -20,4 +20,18 @@ RSpec.describe 'Units', type: :request do
       expect(json['message']).to eql('Please log in')
     end
   end
+
+  describe 'Get /units/:id' do
+    it "returns the unit and all it's measurments made by a user" do
+      user = User.first
+      create(:measurement, user: user)
+      body = JSON.parse(response.body)
+      token = body['token']
+      unit = Unit.last
+      get "/units/#{unit.id}", headers: { Authorization: "Bearer #{token}" }
+      body = JSON.parse(response.body)
+      expect(body['unit']['id']).to eql(unit.id)
+      expect(body['measurements'].size).to eql(1)
+    end
+  end
 end

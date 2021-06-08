@@ -1,9 +1,8 @@
 class UsersController < ApplicationController
-  include ActionController::Cookies
   before_action :authorized, except: %i[create login show auto_login]
 
   def auto_login
-    id = cookies.encrypted[:user_id]
+    id = cookies[:user_id]
     if id
       token = encode_token({ user_id: id })
       render json: { token: token }
@@ -16,7 +15,7 @@ class UsersController < ApplicationController
     @user = User.create(user_params)
     if @user.valid?
       token = encode_token({ user_id: @user.id })
-      cookies.encrypted[:user_id] = { value: @user.id, http_only: true }
+      cookies[:user_id] = { value: @user.id, http_only: true }
       render json: { user: @user, token: token }
     else
       render json: { error: 'Invalid username or password' }
@@ -28,7 +27,7 @@ class UsersController < ApplicationController
 
     if @user&.authenticate(params[:password])
       token = encode_token({ user_id: @user.id })
-      cookies.encrypted[:user_id] = { value: @user.id, http_only: true }
+      cookies[:user_id] = { value: @user.id, http_only: true }
       render json: { user: @user, token: token }
     else
       render json: { error: 'Invalid username or password' }

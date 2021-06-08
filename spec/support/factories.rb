@@ -11,6 +11,8 @@ FactoryBot.define do
   end
 
   factory :measurement do
+    user { create :user }
+    unit { create :unit }
     value { rand * 10.round }
   end
 end
