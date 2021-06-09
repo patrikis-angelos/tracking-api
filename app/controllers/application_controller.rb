@@ -1,5 +1,4 @@
 class ApplicationController < ActionController::API
-  include ActionController::Cookies
   before_action :authorized
 
   def encode_token(payload)
@@ -41,6 +40,6 @@ class ApplicationController < ActionController::API
   end
 
   def current_user
-    @current_user ||= User.find(cookies[:user_id]) if cookies[:user_id]
+    @user
   end
 end
