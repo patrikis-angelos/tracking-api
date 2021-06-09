@@ -6,7 +6,6 @@ RSpec.describe 'Users', type: :request do
     it 'creates a new user' do
       post '/users', params: { name: 'patrick', password: '12345' }
       user = User.last
-      body = JSON.parse(response.body)
       expect(user.name).to eql('patrick')
     end
     it 'returns error message if the name or password is invalid' do

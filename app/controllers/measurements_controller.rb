@@ -12,7 +12,7 @@ class MeasurementsController < ApplicationController
   end
 
   def create
-    @measurement = current_user.build(measurement_params)
+    @measurement = current_user.measurements.build(measurement_params)
     @measurement.unit_id = params[:unit_id]
     if @measurement.save
       render json: { measurement: @measurement }
