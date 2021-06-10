@@ -4,7 +4,8 @@ RSpec.describe 'Measurements', type: :request do
   before { post '/users', params: { name: 'patrick', password: '12345' } }
   before do
     user = User.find_by(name: 'patrick')
-    create_list(:measurement, 15, user: user)
+    unit = create(:unit)
+    create_list(:measurement, 15, user: user, unit: unit)
   end
   let(:token) do
     body = JSON.parse(response.body)
@@ -12,10 +13,10 @@ RSpec.describe 'Measurements', type: :request do
   end
 
   describe 'GET /measurements' do
-    it 'returns all the measurements of the current user' do
+    it 'returns all the measurements of the current user for each unit' do
       get '/measurements', headers: { Authorization: "Bearer #{token}" }
       body = JSON.parse(response.body)
-      expect(body['measurements'].size).to eql(15)
+      expect(body['data'][0]['measurements'].size).to eql(15)
     end
   end
 

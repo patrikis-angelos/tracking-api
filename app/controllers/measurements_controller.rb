@@ -1,14 +1,14 @@
 class MeasurementsController < ApplicationController
   def index
-    @measurements = current_user.measurements.with_units
+    @units = Unit.all.with_measurements
     data = []
-    @measurements.each do |m|
+    @units.each do |u|
       item = {}
-      item['unit'] = m.unit
-      item['value'] = m
+      item['unit'] = u
+      item['measurements'] = u.measurements
       data << item
     end
-    render json: { measurements: data, status: :ok }
+    render json: { data: data, status: :ok }
   end
 
   def create
