@@ -4,5 +4,9 @@ class Measurement < ApplicationRecord
 
   scope :with_units, -> { includes(:unit) }
 
+  def self.currentUsers(user)
+    Measurement.all.where(user_id: user.id)
+  end
+
   validates :value, presence: true
 end

@@ -1,12 +1,9 @@
 class MeasurementsController < ApplicationController
   def index
-    @units = Unit.all.with_measurements
-    data = []
-    @units.each do |u|
-      item = {}
-      item['unit'] = u
-      item['measurements'] = u.measurements
-      data << item
+    @measurements = current_user.measurements.with_units
+    data = Hash.new {|h,k| h[k] = [] }
+    @measurements.each do |m|
+      data[m.unit.title] << m
     end
     render json: { data: data, status: :ok }
   end
@@ -35,6 +32,6 @@ class MeasurementsController < ApplicationController
   private
 
   def measurement_params
-    params.permit(:value)
+    params.permit(:value, :unit_id)
   end
 end
