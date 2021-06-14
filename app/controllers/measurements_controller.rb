@@ -1,6 +1,6 @@
 class MeasurementsController < ApplicationController
   def index
-    @measurements = current_user.measurements.with_units
+    @measurements = current_user.measurements.with_units.order(created_at: :desc)
     data = Hash.new {|h,k| h[k] = [] }
     @measurements.each do |m|
       data[m.unit.title] << m

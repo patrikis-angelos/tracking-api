@@ -15,8 +15,9 @@ RSpec.describe 'Measurements', type: :request do
   describe 'GET /measurements' do
     it 'returns all the measurements of the current user for each unit' do
       get '/measurements', headers: { Authorization: "Bearer #{token}" }
+      unit = Unit.last
       body = JSON.parse(response.body)
-      expect(body['data'][0]['measurements'].size).to eql(15)
+      expect(body['data'][unit.title].size).to eql(15)
     end
   end
 
