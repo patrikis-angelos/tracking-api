@@ -2,8 +2,8 @@
 
 # Healthify Api
 
-This is the backend of my Healthify app that consistes of 3 tables, users, units and measurements.
-The api is hosted in heroku. The base url is https://fast-escarpment-85327.herokuapp.com and has the following endpoints
+This is the backend of my Healthify app which consists of 3 tables, users, units, and measurements.
+The API is hosted in Heroku. The base url is https://fast-escarpment-85327.herokuapp.com and has the following endpoints
 
 - POST /users 
 Arguments:
@@ -113,6 +113,10 @@ To test the endpoints locally you can use tunneling with ngrok or a similar tool
 - `rails db:create`
 - `rails db:migrate`
 - `rails db:seed` to populate the database
+
+To run the tests:
+
+- `bundle exec rspec`
 
 ## Author
 
