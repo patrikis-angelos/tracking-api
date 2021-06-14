@@ -114,6 +114,12 @@ To test the endpoints locally you can use tunneling with ngrok or a similar tool
 - `rails db:migrate`
 - `rails db:seed` to populate the database
 
+The authentication uses a environment variable to wotk. To set it up:
+
+- `bundle exec figaro install`
+In the `config/application.yml` file that will be created add:
+- `SECRET: <your_secret>`
+
 To run the tests:
 
 - `bundle exec rspec`
