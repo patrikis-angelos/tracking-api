@@ -11,6 +11,7 @@ RSpec.describe 'Measurements', type: :request do
     body = JSON.parse(response.body)
     body['token']
   end
+  ENV['SECRET'] = 's3cr3t' if Rails.env.test?
 
   describe 'GET /measurements' do
     it 'returns all the measurements of the current user for each unit' do

@@ -4,6 +4,7 @@ require_relative '../support/factories'
 RSpec.describe 'Units', type: :request do
   before { create_list(:unit, 10) }
   before { post '/users', params: { name: 'patrick', password: '12345' } }
+  ENV['SECRET'] = 's3cr3t' if Rails.env.test?
 
   describe 'GET /units' do
     it 'returns a list with all available units to track if a user is logged in' do

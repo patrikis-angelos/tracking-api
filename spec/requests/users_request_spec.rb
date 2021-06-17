@@ -2,6 +2,7 @@ require 'rails_helper'
 
 RSpec.describe 'Users', type: :request do
   before { post '/users', params: { name: 'example', password: '12345' } }
+  ENV['SECRET'] = 's3cr3t' if Rails.env.test?
   describe 'POST /users' do
     it 'creates a new user' do
       post '/users', params: { name: 'patrick', password: '12345' }
